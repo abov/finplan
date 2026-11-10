@@ -1,0 +1,98 @@
+# Made-up example household. Copy this file somewhere private, fill in your own
+# numbers, and point finplan at it:  FINPLAN_DATA=~/finplan-data/household.yaml
+#
+# Every account uses the same flat fields; leave out what doesn't apply.
+# kind: checking, savings, brokerage, crypto, ira, roth_ira, 401k, roth_401k, 529,
+#       hsa, whole_life, term_life, disability, annuity, other
+# Amounts are dollars. Dates are YYYY-MM-DD. Expenses are negative.
+
+profile:
+  name: Sam Example
+  birth_date: 1980-03-15
+  state: CO
+
+assumptions:
+  ordinary_tax_rate: 0.22      # federal + state marginal rate
+  capital_gains_rate: 0.15
+  early_withdrawal_penalty: 0.10
+  penalty_free_age: 59.5
+  cash_floor: 2000             # runway ends when checking + savings would drop below this
+  cash_interest_rate: 0.01
+
+accounts:
+  - id: checking
+    name: Checking
+    institution: Local Credit Union
+    kind: checking
+    balance: 12000
+    as_of: 2026-11-01
+
+  - id: savings
+    name: Emergency savings
+    institution: Online Bank
+    kind: savings
+    balance: 18000
+    as_of: 2026-11-01
+
+  - id: brokerage
+    name: Index fund brokerage
+    institution: Broker A
+    kind: brokerage
+    balance: 40000
+    cost_basis: 31000
+    as_of: 2026-11-01
+
+  - id: work-401k
+    name: Work 401(k)
+    institution: Recordkeeper B
+    kind: 401k
+    balance: 95000
+    as_of: 2026-11-01
+
+  - id: roth
+    name: Roth IRA
+    institution: Broker A
+    kind: roth_ira
+    balance: 30000
+    cost_basis: 21000          # total contributions; withdrawable any time
+    as_of: 2026-11-01
+
+  - id: whole-life
+    name: Whole life policy
+    institution: Insurer C
+    kind: whole_life
+    balance: 9000              # cash value
+    surrender_charge: 1200
+    cost_basis: 10800          # premiums paid so far
+    death_benefit: 250000
+    premium: 300
+    premium_end: 2045-12-01
+    as_of: 2026-10-15
+
+  - id: term
+    name: 20-year term
+    institution: Insurer C
+    kind: term_life
+    death_benefit: 500000
+    premium: 40
+    premium_end: 2040-06-01
+
+  - id: annuity
+    name: Fixed indexed annuity
+    institution: Insurer D
+    kind: annuity
+    balance: 25000             # accumulation value
+    surrender_charge: 1750
+    cost_basis: 22000
+    as_of: 2026-09-30
+    notes: Income rider benefit base is not cash and is not counted here.
+
+cashflows:
+  - {name: Salary (after tax), amount: 5200, category: income}
+  - {name: Rent, amount: -1900, category: housing}
+  - {name: Groceries, amount: -650, category: food}
+  - {name: Utilities, amount: -220, category: housing}
+  - {name: Phone and internet, amount: -110, category: utilities}
+  - {name: Car insurance, amount: -720, frequency: semiannual, months: [1, 7], category: transport}
+  - {name: Subscriptions, amount: -45, category: subscriptions}
+  - {name: Roth contribution, amount: -500, category: saving}

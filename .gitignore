@@ -1,0 +1,12 @@
+# Never commit real financial data to this public repo.
+household.yaml
+*.private.yaml
+data/
+private/
+*.csv
+
+__pycache__/
+*.egg-info/
+.pytest_cache/
+.venv/
+.streamlit/secrets.toml

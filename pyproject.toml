@@ -1,0 +1,20 @@
+[project]
+name = "finplan"
+version = "0.1.0"
+description = "A personal finance calculator for every account you own: cash, investments, retirement, life and disability insurance, and annuities."
+readme = "README.md"
+requires-python = ">=3.10"
+license = {text = "MIT"}
+dependencies = ["pyyaml>=6", "pandas>=2", "streamlit>=1.40", "plotly>=5"]
+
+[project.optional-dependencies]
+dev = ["pytest>=8"]
+
+[project.scripts]
+finplan = "finplan.cli:main"
+
+[tool.setuptools]
+packages = ["finplan"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
